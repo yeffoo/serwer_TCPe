@@ -127,14 +127,19 @@ namespace klient1_TCP
             try
             {
                 SetText2("próbuję wysłać dane");
-                TcpClient client = new TcpClient("192.168.178.105", 1200);    //siec lan
-                //TcpClient client = new TcpClient("127.0.0.1", 1200);    //localhost
+                //TcpClient client = new TcpClient("192.168.178.105", 1200);    //siec lan
+                TcpClient client = new TcpClient("127.0.0.1", 1200);    //localhost
                 client.SendTimeout = 100;
                 NetworkStream n = client.GetStream();
                 SetText2(" Połączono");
                 zmienna++;
-                string ch = zmienna.ToString();
-                //string ch = textBox1.Text;
+                //string ch = zmienna.ToString();
+                //wysłanie ramki danych [x y host ip time]
+                string ch = textBox1.Text + Environment.NewLine
+                   + textBox6.Text + Environment.NewLine
+                   + textBox3.Text + Environment.NewLine
+                   + textBox4.Text + Environment.NewLine
+                   + textBox5.Text + Environment.NewLine;
                 byte[] message = Encoding.Unicode.GetBytes(ch);
                 n.Write(message, 0, message.Length);
                 SetText2("Wysłano");
